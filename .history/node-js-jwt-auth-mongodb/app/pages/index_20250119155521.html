@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshShare - Share Fresh Food</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #98D8AA;
+            --secondary-color: #F3E99F;
+            --accent-color: #D7B9D5;
+            --background-color: #F6F7D4;
+            --text-color: #2C3639;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .hero-section {
+            background-color: #e8f4f1;
+            padding: 80px 0;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            background-color: #98D8AA;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #98D8AA;
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: #98D8AA;
+            font-weight: 500;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .food-gallery {
+            margin: 50px 0;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Share Fresh Food with Your Community</h1>
+                    <p>Join local food-sharing groups, reduce waste, and save money while helping your community..</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary">Sign Up</button>
+                        <button class="btn btn-outline">Log In</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/assets/images/fresh-vegetables.jpg" alt="Fresh vegetables and produce">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose FreshShare?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-hand-holding-heart feature-icon"></i>
+                        <h3>Reduce Food Waste</h3>
+                        <p>Help reduce food waste by sharing excess fresh food with your community.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3>Build Community</h3>
+                        <p>Connect with neighbors and build a stronger, more sustainable community.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-leaf feature-icon"></i>
+                        <h3>Eat Fresh</h3>
+                        <p>Access fresh, locally sourced food from people in your neighborhood.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="food-gallery">
+        <div class="container">
+            <h2 class="text-center mb-5">Fresh Food Gallery</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="/assets/images/food1.jpg" alt="Fresh Vegetables">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="/assets/images/food2.jpg" alt="Fresh Fruits">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="/assets/images/food3.jpg" alt="Fresh Produce">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
