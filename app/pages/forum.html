@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' ws://127.0.0.1:* wss://127.0.0.1:*; default-src 'self' 'unsafe-inline' 'unsafe-eval' *">
+    <title>Forum - FreshShare</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- FreshShare Core Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+
+    <!-- Page-specific CSS -->
+    <style>
+        :root {
+            --primary-color: #98D8AA;
+            --secondary-color: #F3E99F;
+            --accent-color: #D7B9D5;
+            --background-color: #F6F7D4;
+            --text-color: #2C3639;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .forum-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .forum-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .category-badge {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        .forum-filters {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+    </style>
+
+    <!-- Common Scripts -->
+    <script src="/js/common.js"></script>
+    <script src="/js/config.js"></script>
+    <script type="module" src="/js/load-sidebar.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Community Forum</h1>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                    <i class="fas fa-plus me-2"></i>New Post
+                </button>
+            </div>
+
+            <!-- Forum Filters -->
+            <div class="forum-filters">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="category-filter" class="form-label">Category</label>
+                        <select class="form-select" id="category-filter">
+                            <option value="all">All Categories</option>
+                            <option value="tips">Tips & Tricks</option>
+                            <option value="recipes">Recipes</option>
+                            <option value="questions">Questions</option>
+                            <option value="events">Events</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="sort-filter" class="form-label">Sort By</label>
+                        <select class="form-select" id="sort-filter">
+                            <option value="recent">Most Recent</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="discussed">Most Discussed</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="time-filter" class="form-label">Time Period</label>
+                        <select class="form-select" id="time-filter">
+                            <option value="all">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="search" class="form-label">Search</label>
+                        <input type="text" class="form-control" id="search" placeholder="Search posts...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forum Posts -->
+            <div class="forum-posts">
+                <!-- Sample Post -->
+                <div class="forum-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/images/CommunityMembers.jpg" alt="User Avatar" class="user-avatar">
+                        <div>
+                            <h5 class="mb-0">Best Practices for Storing Fresh Vegetables</h5>
+                            <div class="post-meta">
+                                <span class="me-3">Posted by John Doe</span>
+                                <span>2 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="category-badge">Tips & Tricks</span>
+                        <span class="category-badge">Storage</span>
+                    </div>
+                    <p>I've been experimenting with different storage methods for keeping vegetables fresh longer. Here are some tips that have worked really well for me...</p>
+                    <div class="post-stats">
+                        <span><i class="fas fa-thumbs-up me-1"></i>24 Likes</span>
+                        <span><i class="fas fa-comment me-1"></i>12 Comments</span>
+                        <span><i class="fas fa-share me-1"></i>Share</span>
+                    </div>
+                </div>
+
+                <!-- Sample Post -->
+                <div class="forum-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/images/CommunityMembers.jpg" alt="User Avatar" class="user-avatar">
+                        <div>
+                            <h5 class="mb-0">Community Garden Event This Weekend</h5>
+                            <div class="post-meta">
+                                <span class="me-3">Posted by Sarah Smith</span>
+                                <span>1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="category-badge">Events</span>
+                        <span class="category-badge">Community</span>
+                    </div>
+                    <p>Join us this weekend for our monthly community garden meetup! We'll be sharing gardening tips, exchanging seeds, and planning our spring planting schedule...</p>
+                    <div class="post-stats">
+                        <span><i class="fas fa-thumbs-up me-1"></i>45 Likes</span>
+                        <span><i class="fas fa-comment me-1"></i>28 Comments</span>
+                        <span><i class="fas fa-share me-1"></i>Share</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Post Modal -->
+    <div class="modal fade" id="createPostModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createPostForm">
+                        <div class="mb-3">
+                            <label for="postTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="postTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postContent" class="form-label">Content</label>
+                            <textarea class="form-control" id="postContent" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postCategories" class="form-label">Categories</label>
+                            <select class="form-select" id="postCategories" multiple>
+                                <option value="tips">Tips & Tricks</option>
+                                <option value="recipes">Recipes</option>
+                                <option value="questions">Questions</option>
+                                <option value="events">Events</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Create Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Load Header and Footer -->
+    <script src="/js/load-footer.js"></script>
+    <script>
+        // Load header
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+        // Initialize forum functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for filters
+            document.getElementById('category-filter').addEventListener('change', filterPosts);
+            document.getElementById('sort-filter').addEventListener('change', filterPosts);
+            document.getElementById('time-filter').addEventListener('change', filterPosts);
+            document.getElementById('search').addEventListener('input', filterPosts);
+        });
+
+        function filterPosts() {
+            // Implement filtering logic here
+            console.log('Filtering posts...');
+        }
+    </script>
+</body>
+</html>
