@@ -10,17 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/components/header.css">
-    <link rel="stylesheet" href="css/components/hero.css">
-    <link rel="stylesheet" href="css/components/features.css">
-    <link rel="stylesheet" href="css/components/groups.css">
-    <link rel="stylesheet" href="css/components/understanding.css">
+    <link rel="stylesheet" href="/node-js-jwt-auth-mongodb/app/pages/css/styles.css">
+    <link rel="stylesheet" href="/node-js-jwt-auth-mongodb/app/pages/css/components/header.css">
+    <link rel="stylesheet" href="/node-js-jwt-auth-mongodb/app/pages/css/components/hero.css">
+    <link rel="stylesheet" href="/node-js-jwt-auth-mongodb/app/pages/css/components/features.css">
+    <link rel="stylesheet" href="/node-js-jwt-auth-mongodb/app/pages/css/components/groups.css">
+    <link rel="stylesheet" href="/node-js-jwt-auth-mongodb/app/pages/css/components/understanding.css">
 
     <!-- Scripts -->
-    <script src="js/config.js"></script>
-    <script src="js/location-service.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/node-js-jwt-auth-mongodb/app/pages/js/header.js"></script>
+    <script src="/node-js-jwt-auth-mongodb/app/pages/js/config.js"></script>
+    <script src="/node-js-jwt-auth-mongodb/app/pages/js/location-service.js"></script>
+    <script src="/node-js-jwt-auth-mongodb/app/pages/js/main.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -38,7 +39,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="assets/images/vegetables.jpg" alt="Fresh vegetables and produce">
+                <img src="/node-js-jwt-auth-mongodb/app/pages/assets/images/fresh-vegetables.jpg" alt="Fresh vegetables and produce">
             </div>
         </div>
     </section>
@@ -86,7 +87,7 @@
                 </ul>
             </div>
             <div class="info-image">
-                <img src="assets/images/people.jpg" alt="Community members sharing fresh produce" class="feature-image">
+                <img src="/node-js-jwt-auth-mongodb/app/pages/assets/images/people.jpg" alt="Community members sharing fresh produce" class="feature-image">
             </div>
         </div>
         <div class="benefits-grid">
@@ -126,7 +127,7 @@
 
     <script>
         // Load header
-        fetch('./pages/header.html')
+        fetch('/node-js-jwt-auth-mongodb/app/pages/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-container').innerHTML = data;
@@ -134,7 +135,7 @@
             .catch(error => console.error('Error loading header:', error));
 
         // Load footer
-        fetch('./pages/footer.html')
+        fetch('/node-js-jwt-auth-mongodb/app/pages/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
