@@ -1,0 +1,145 @@
+<!-- Header Component -->
+<style>
+    .header {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 1rem 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #98D8AA;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .logo i {
+        color: #98D8AA;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .nav-link {
+        color: #666;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: #98D8AA;
+    }
+
+    .auth-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn-login {
+        color: #98D8AA;
+        border: 2px solid #98D8AA;
+    }
+
+    .btn-register {
+        background-color: #98D8AA;
+        color: white;
+        border: 2px solid #98D8AA;
+    }
+
+    .btn-logout {
+        background-color: #98D8AA;
+        color: white;
+        border: 2px solid #98D8AA;
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+    }
+</style>
+
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <i class="fas fa-leaf"></i>
+                FreshShare
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/dashboard" class="nav-link" id="dashboardLink">Dashboard</a>
+                <a href="/about" class="nav-link" id="aboutLink">About</a>
+                <a href="/wallet" class="nav-link" id="walletLink">
+                    <i class="fas fa-wallet"></i>
+                    Wallet
+                </a>
+                <div id="auth-buttons">
+                    <a href="/login" class="btn btn-login" id="loginBtn">Login</a>
+                    <a href="/register" class="btn btn-register" id="registerBtn">Register</a>
+                    <button onclick="logout()" class="btn btn-logout" id="logoutBtn" style="display: none;">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script>
+(function() {
+    async function updateHeader() {
+        const token = localStorage.getItem('token');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const dashboardLink = document.getElementById('dashboardLink');
+        const walletLink = document.getElementById('walletLink');
+
+        if (token) {
+            loginBtn.style.display = 'none';
+            registerBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline-block';
+            dashboardLink.style.display = 'inline-block';
+            walletLink.style.display = 'inline-block';
+        } else {
+            loginBtn.style.display = 'inline-block';
+            registerBtn.style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+            dashboardLink.style.display = 'none';
+            walletLink.style.display = 'none';
+        }
+    }
+
+    async function logout() {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+    }
+
+    window.logout = logout;
+    document.addEventListener('DOMContentLoaded', updateHeader);
+})();
+</script>

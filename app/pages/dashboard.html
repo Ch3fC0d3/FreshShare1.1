@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Fresh Share</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding-top: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .dashboard-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+        }
+        .dashboard-card h3 {
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-family: 'Syne', sans-serif;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #45a049;
+        }
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        .recent-activity {
+            margin-top: 2rem;
+        }
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e8f5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: #4CAF50;
+        }
+        .activity-content {
+            flex: 1;
+        }
+        .activity-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+    <main>
+        <div class="dashboard-container">
+            <h1>Dashboard</h1>
+            
+            <div class="dashboard-grid">
+                <!-- Food Sharing Stats -->
+                <div class="dashboard-card">
+                    <h3>Food Sharing Stats</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="sharedItems">0</div>
+                            <div class="stat-label">Items Shared</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="helpedPeople">0</div>
+                            <div class="stat-label">People Helped</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="/share.html" class="btn btn-primary">Share Food</a>
+                        <a href="/browse.html" class="btn btn-secondary">Browse</a>
+                    </div>
+                </div>
+
+                <!-- Community Activity -->
+                <div class="dashboard-card">
+                    <h3>Community Activity</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="groupCount">0</div>
+                            <div class="stat-label">Groups Joined</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="messageCount">0</div>
+                            <div class="stat-label">Messages</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="/groups.html" class="btn btn-primary">Join Groups</a>
+                        <a href="/community.html" class="btn btn-secondary">Community</a>
+                    </div>
+                </div>
+
+                <!-- Impact Stats -->
+                <div class="dashboard-card">
+                    <h3>Your Impact</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="wasteReduced">0</div>
+                            <div class="stat-label">kg Waste Reduced</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="co2Saved">0</div>
+                            <div class="stat-label">kg CO₂ Saved</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="/impact.html" class="btn btn-primary">View Impact</a>
+                        <a href="/tips.html" class="btn btn-secondary">Get Tips</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <div id="activityList">
+                    <!-- Activity items will be populated here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/common.js"></script>
+    
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Check authentication before loading dashboard
+        if (!requireAuth()) {
+            throw new Error('Authentication required');
+        }
+
+        // Load header
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+        // Function to load dashboard data
+        async function loadDashboardData() {
+            try {
+                // Simulate loading data (replace with actual API calls)
+                document.getElementById('sharedItems').textContent = '12';
+                document.getElementById('helpedPeople').textContent = '45';
+                document.getElementById('groupCount').textContent = '3';
+                document.getElementById('messageCount').textContent = '27';
+                document.getElementById('wasteReduced').textContent = '156';
+                document.getElementById('co2Saved').textContent = '234';
+
+                // Load recent activity
+                const activityList = document.getElementById('activityList');
+                const activities = [
+                    { icon: 'fa-share-alt', text: 'Shared 2kg of fresh vegetables', time: '2 hours ago' },
+                    { icon: 'fa-users', text: 'Joined "Local Food Heroes" group', time: '1 day ago' },
+                    { icon: 'fa-comment', text: 'Received a new message', time: '2 days ago' }
+                ];
+
+                activityList.innerHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas ${activity.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div>${activity.text}</div>
+                            <div class="activity-time">${activity.time}</div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+
+        // Load dashboard data when page loads
+        loadDashboardData();
+    </script>
+</body>
+</html>

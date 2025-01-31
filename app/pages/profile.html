@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net">
+    <title>Profile - FreshShare</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Profile-specific styles */
+        .profile-container {
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .welcome-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            width: 100%;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-info {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .profile-columns {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 992px) {
+            .profile-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .profile-edit-section {
+            max-width: 1200px !important; /* Override the default max-width */
+        }
+
+        .profile-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-4">
+        <div class="welcome-section">
+            <h2>Welcome Back, <span id="username">User</span>!</h2>
+            <p>Here's what's happening with your FreshShare account</p>
+        </div>
+
+        <!-- Three Column Layout -->
+        <div class="profile-columns">
+            <!-- Calendar Section -->
+            <div class="calendar-section">
+                <!-- Calendar Widget -->
+                <div class="calendar-widget">
+                    <h3><i class="fas fa-calendar-alt me-2"></i>Calendar</h3>
+                    <div class="calendar-placeholder">
+                        <p class="text-muted text-center my-4">Calendar integration coming soon!</p>
+                        <div class="text-center">
+                            <i class="fas fa-calendar-alt fa-3x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="upcoming-events">
+                    <h3><i class="fas fa-calendar-day me-2"></i>Upcoming Events</h3>
+                    <div class="event-list">
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="day">20</div>
+                                <div class="month">Jan</div>
+                            </div>
+                            <div class="event-info">
+                                <h5>Community Garden Share</h5>
+                                <p><i class="fas fa-clock me-1"></i>2:00 PM</p>
+                                <p><i class="fas fa-map-marker-alt me-1"></i>Local Garden</p>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="day">22</div>
+                                <div class="month">Jan</div>
+                            </div>
+                            <div class="event-info">
+                                <h5>Fruit Exchange</h5>
+                                <p><i class="fas fa-clock me-1"></i>10:00 AM</p>
+                                <p><i class="fas fa-map-marker-alt me-1"></i>Community Center</p>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="day">25</div>
+                                <div class="month">Jan</div>
+                            </div>
+                            <div class="event-info">
+                                <h5>Food Waste Workshop</h5>
+                                <p><i class="fas fa-clock me-1"></i>3:30 PM</p>
+                                <p><i class="fas fa-map-marker-alt me-1"></i>City Library</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past Orders Column -->
+            <div class="past-orders">
+                <h3><i class="fas fa-history me-2"></i>Recent Exchanges</h3>
+                <div class="order-list">
+                    <div class="order-item">
+                        <h5><i class="fas fa-arrow-down text-success me-1"></i>Fresh Tomatoes</h5>
+                        <p class="text-muted mb-1">From Sarah J.</p>
+                        <small class="text-muted">Jan 18</small>
+                    </div>
+                    <div class="order-item">
+                        <h5><i class="fas fa-arrow-up text-primary me-1"></i>Organic Apples</h5>
+                        <p class="text-muted mb-1">To Michael R.</p>
+                        <small class="text-muted">Jan 15</small>
+                    </div>
+                    <div class="order-item">
+                        <h5><i class="fas fa-arrow-down text-success me-1"></i>Garden Mix</h5>
+                        <p class="text-muted mb-1">From Garden Group</p>
+                        <small class="text-muted">Jan 12</small>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="#" class="btn btn-link btn-sm">View All Exchanges</a>
+                </div>
+            </div>
+
+            <!-- Messages Column -->
+            <div class="messages-widget">
+                <h3><i class="fas fa-envelope me-2"></i>Messages</h3>
+                <div class="messages-list">
+                    <div class="message-item unread-message">
+                        <p class="mb-1"><strong>Sarah J.</strong></p>
+                        <p class="text-muted mb-1">Thanks for the tomatoes!</p>
+                        <small class="text-muted">2 hours ago</small>
+                    </div>
+                    <div class="message-item">
+                        <p class="mb-1"><strong>Michael R.</strong></p>
+                        <p class="text-muted mb-1">When can I pick up the apples?</p>
+                        <small class="text-muted">Yesterday</small>
+                    </div>
+                    <div class="message-item">
+                        <p class="mb-1"><strong>Garden Group</strong></p>
+                        <p class="text-muted mb-1">New vegetables available!</p>
+                        <small class="text-muted">2 days ago</small>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-outline-primary btn-sm">View All Messages</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Sections -->
+        <div class="bottom-sections">
+            <!-- Profile Overview -->
+            <div class="section-card">
+                <div class="card-header">
+                    <h4><i class="fas fa-chart-bar me-2"></i>Profile Overview</h4>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>24</h3>
+                                <p>Items Shared</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>156</h3>
+                                <p>Community Members</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>45</h3>
+                                <p>Active Listings</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>89</h3>
+                                <p>Items Received</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Profile -->
+            <div class="section-card profile-edit-section">
+                <div class="profile-header">
+                    <h4>Update your personal information</h4>
+                    <p>Make changes to your profile information below</p>
+                </div>
+                <div class="profile-form">
+                    <form id="profileForm">
+                        <div class="profile-section">
+                            <div class="profile-section-title">
+                                <i class="fas fa-user-circle"></i>Personal Information
+                            </div>
+                            <div class="profile-form-grid">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="street">Street Address</label>
+                                        <input type="text" class="form-control" id="street" placeholder="Enter your street address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" id="city" placeholder="Enter your city">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" class="form-control" id="state" placeholder="Enter your state">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zipcode">ZIP Code</label>
+                                        <input type="text" class="form-control" id="zipcode" placeholder="Enter your ZIP code">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="profile-section-title">
+                                <i class="fas fa-lock"></i>Security
+                            </div>
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="profile-save-btn">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+
+                        <div id="profileSuccess" class="profile-success">
+                            <i class="fas fa-check-circle me-2"></i>Profile updated successfully!
+                        </div>
+                        <div id="profileError" class="profile-error">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <span id="errorText">Error updating profile</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer-container"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/auth.js"></script>
+        <script src="/js/common.js"></script>
+        <script>
+            // Load user profile data
+            async function loadProfileData() {
+                try {
+                    if (!requireAuth()) return;
+                    
+                    const profile = await fetchUserProfile();
+                    if (profile) {
+                        // Update welcome message
+                        document.getElementById('username').textContent = profile.username;
+                        
+                        // Update profile form if it exists
+                        const emailInput = document.getElementById('email');
+                        if (emailInput) emailInput.value = profile.email;
+                        
+                        const usernameInput = document.getElementById('username-input');
+                        if (usernameInput) usernameInput.value = profile.username;
+                    }
+                } catch (error) {
+                    console.error('Error loading profile:', error);
+                }
+            }
+
+            // Load profile data when the page loads
+            document.addEventListener('DOMContentLoaded', loadProfileData);
+
+            // Handle profile form submission
+            const profileForm = document.getElementById('profileForm');
+            if (profileForm) {
+                profileForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    // Add profile update logic here
+                });
+            }
+        </script>
+    </body>
+</html>

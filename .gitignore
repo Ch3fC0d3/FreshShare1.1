@@ -1,0 +1,21 @@
+node_modules
+package-lock.json
+.env
+
+# Large files and media
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.pdf
+*.zip
+*.tar
+*.gz
+*.mp4
+*.webm
+*.webp
+
+# Vendor directories
+app/pages/vendor/
+node_modules/

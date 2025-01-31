@@ -1,0 +1,44 @@
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: white !important;
+}
+
+.navbar-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-brand i {
+    margin-right: 0.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #333 !important;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #28a745 !important;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 0.5rem;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0;
+    }
+}

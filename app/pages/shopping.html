@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Fresh Share</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <!-- Header Script -->
+    <script src="/js/header.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding-top: 80px;
+        }
+        
+        .marketplace-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-option input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .item-info {
+            padding: 1rem;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .item-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            color: #4CAF50;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .item-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .btn-contact {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-contact:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <div class="marketplace-container">
+        <div class="row">
+            <!-- Filters -->
+            <div class="col-md-3">
+                <div class="filters">
+                    <div class="filter-section">
+                        <h3>Categories</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="vegetables">
+                            <label for="vegetables">Vegetables</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="fruits">
+                            <label for="fruits">Fruits</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="dairy">
+                            <label for="dairy">Dairy</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="grains">
+                            <label for="grains">Grains</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Distance</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="1km">
+                            <label for="1km">Within 1 km</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="5km">
+                            <label for="5km">Within 5 km</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="10km">
+                            <label for="10km">Within 10 km</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Freshness</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="today">
+                            <label for="today">Today</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="3days">
+                            <label for="3days">Last 3 days</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="week">
+                            <label for="week">Last week</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items Grid -->
+            <div class="col-md-9">
+                <input type="text" class="search-input" placeholder="Search for fresh food in your area...">
+
+                <div class="items-grid">
+                    <!-- Sample Items -->
+                    <div class="item-card">
+                        <img src="/assets/images/vegetables.jpg" alt="Fresh Vegetables" class="item-image">
+                        <div class="item-info">
+                            <h3 class="item-title">Fresh Garden Vegetables</h3>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i> 2.3 km away
+                            </div>
+                            <div class="item-price">Free</div>
+                            <div class="item-meta">
+                                <span class="item-date">Posted 2 hours ago</span>
+                                <button class="btn-contact">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-card">
+                        <img src="/assets/images/fruits.jpg" alt="Organic Fruits" class="item-image">
+                        <div class="item-info">
+                            <h3 class="item-title">Organic Fruit Basket</h3>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i> 1.5 km away
+                            </div>
+                            <div class="item-price">Free</div>
+                            <div class="item-meta">
+                                <span class="item-date">Posted 1 hour ago</span>
+                                <button class="btn-contact">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-card">
+                        <img src="/assets/images/bread.jpg" alt="Fresh Bread" class="item-image">
+                        <div class="item-info">
+                            <h3 class="item-title">Homemade Bread</h3>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i> 0.8 km away
+                            </div>
+                            <div class="item-price">Free</div>
+                            <div class="item-meta">
+                                <span class="item-date">Posted 30 minutes ago</span>
+                                <button class="btn-contact">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add any additional JavaScript for the marketplace functionality here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize any marketplace-specific features
+        });
+    </script>
+</body>
+</html>

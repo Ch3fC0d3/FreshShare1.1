@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - FreshShare</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/home.html">FreshShare</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shopping.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/groups.html">Groups</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/forum.html">Forum</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/profile.html" class="btn btn-outline-primary me-2">Profile</a>
+                    <button onclick="logout()" class="btn btn-outline-danger">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Featured Content -->
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2>Welcome to FreshShare</h2>
+                        <p class="lead">Connect with local food enthusiasts, share recipes, and reduce food waste!</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Recent Activity</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="activity-feed">
+                            <!-- Activity items will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-md-4">
+                <!-- Quick Actions -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Quick Actions</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a href="/shopping.html" class="btn btn-primary">Browse Marketplace</a>
+                            <a href="/groups.html" class="btn btn-success">Join a Group</a>
+                            <a href="/forum.html" class="btn btn-info">Start Discussion</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Upcoming Events</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="events-list">
+                            <!-- Events will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/load-footer.js"></script>
+    <script type="module" src="/js/load-sidebar.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login.html';
+        }
+
+        // Load activity feed
+        async function loadActivityFeed() {
+            const activityFeed = document.getElementById('activity-feed');
+            // TODO: Replace with actual API call
+            const activities = [
+                { type: 'new_listing', user: 'Sarah', action: 'posted a new item', time: '2 hours ago' },
+                { type: 'group_join', user: 'Mike', action: 'joined Veggie Lovers group', time: '3 hours ago' },
+                { type: 'forum_post', user: 'John', action: 'started a discussion', time: '5 hours ago' }
+            ];
+
+            activityFeed.innerHTML = activities.map(activity => `
+                <div class="activity-item mb-3">
+                    <strong>${activity.user}</strong> ${activity.action}
+                    <small class="text-muted d-block">${activity.time}</small>
+                </div>
+            `).join('');
+        }
+
+        // Load upcoming events
+        async function loadEvents() {
+            const eventsList = document.getElementById('events-list');
+            // TODO: Replace with actual API call
+            const events = [
+                { name: 'Community Cookout', date: 'This Saturday', location: 'Central Park' },
+                { name: 'Food Waste Workshop', date: 'Next Tuesday', location: 'Community Center' }
+            ];
+
+            eventsList.innerHTML = events.map(event => `
+                <div class="event-item mb-3">
+                    <strong>${event.name}</strong>
+                    <div class="text-muted">
+                        <small><i class="fas fa-calendar"></i> ${event.date}</small>
+                        <small class="ms-2"><i class="fas fa-map-marker-alt"></i> ${event.location}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadActivityFeed();
+            loadEvents();
+        });
+    </script>
+</body>
+</html>
