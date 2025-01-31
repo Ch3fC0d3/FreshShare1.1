@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Fresh Share</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' ws://127.0.0.1:* wss://127.0.0.1:*; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+
+    <!-- Custom About Page Styles -->
+    <style>
+        .about-section {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-header p {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mission-content {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .mission-content h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .mission-content p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .mission-image {
+            margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mission-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .mission-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .mission-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .mission-card i {
+            font-size: 2.5em;
+            color: #98D8AA;
+            margin-bottom: 20px;
+        }
+
+        .mission-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .mission-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .team-section h2 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .team-member h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: #666;
+            font-style: italic;
+        }
+
+        .placeholder-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .placeholder-image i {
+            font-size: 60px;
+            color: #98D8AA;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-header">
+                <h1>About Fresh Share</h1>
+                <p>Building stronger communities through food sharing, one neighborhood at a time.</p>
+            </div>
+
+            <div class="mission-content">
+                <h2>Our Mission</h2>
+                <p>At FreshShare, we're on a mission to transform how communities access fresh, quality food. By connecting neighbors and local producers through our platform, we're building a more sustainable and equitable food system.</p>
+                <p>We believe that by working together, we can make healthy food more affordable, support local producers, and build stronger communities - one group purchase at a time.</p>
+                <div class="mission-image">
+                    <img src="assets/images/vegetables.jpg" alt="Fresh produce at a farmers market">
+                </div>
+            </div>
+
+            <div class="mission-values">
+                <div class="mission-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Our Mission</h3>
+                    <p>To reduce food waste and strengthen community bonds by creating a platform where neighbors can share fresh, surplus food with each other.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Our Vision</h3>
+                    <p>A world where no food goes to waste, and communities are connected through the sharing of fresh, healthy food resources.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Our Values</h3>
+                    <p>Community, Sustainability, Generosity, and Innovation drive everything we do at Fresh Share.</p>
+                </div>
+            </div>
+
+            <div class="team-section">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="placeholder-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Sarah Johnson</h3>
+                        <p>Founder & CEO</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="placeholder-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Michael Chen</h3>
+                        <p>Tech Lead</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="placeholder-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Lisa Rodriguez</h3>
+                        <p>Community Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Load header
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+        // Load footer
+        fetch('/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

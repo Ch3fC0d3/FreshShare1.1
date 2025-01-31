@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Share - Share Fresh Food with Your Community</title>
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' ws://127.0.0.1:* wss://127.0.0.1:*; default-src 'self' 'unsafe-inline' 'unsafe-eval' *">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/hero.css">
+    <link rel="stylesheet" href="css/components/features.css">
+    <link rel="stylesheet" href="css/components/groups.css">
+    <link rel="stylesheet" href="css/components/understanding.css">
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/location-service.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Share Fresh Food with Your Community</h1>
+                <p>Join local food-sharing groups, reduce waste, and save money while helping your community all with miliary grade encyption.</p>
+                <div class="hero-buttons">
+                    <a href="/signup.html" class="btn btn-primary">Get Started</a>
+                    <a href="/login" class="btn btn-secondary">Log In</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/vegetables.jpg" alt="Fresh vegetables and produce">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Join Groups</h3>
+                    <p>Connect with local food-sharing groups in your neighborhood.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shopping-basket"></i>
+                    <h3>Share Food</h3>
+                    <p>Share excess food or join others in bulk purchases.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Help Community</h3>
+                    <p>Reduce food waste and help your local community thrive.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>Save Money</h3>
+                    <p>Save money through group purchases and sharing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Understanding Section -->
+<section class="understanding-section">
+    <div class="container">
+        <h2>Understanding Fresh Share</h2>
+        <div class="info-grid">
+            <div class="info-text">
+                <p class="intro">A <strong>Fresh Share group</strong> is a collective of neighbors who pool their resources to purchase fresh, local food directly from farmers and suppliers. This collaborative approach enables members to access high-quality products at reduced prices while supporting local communities.</p>
+                <h3>How Fresh Share Works</h3>
+                <ul class="feature-list">
+                    <li><strong>Group Ordering:</strong> Members express interest in local, fresh products, and once enough people join, the group places a bulk order directly from local farmers.</li>
+                    <li><strong>Cost Sharing:</strong> The total cost is divided among participants based on their orders, resulting in significant savings compared to retail prices.</li>
+                    <li><strong>Distribution:</strong> Fresh items are divided among members at convenient pickup locations or through local delivery options.</li>
+                </ul>
+            </div>
+            <div class="info-image">
+                <img src="assets/images/people.jpg" alt="Community members sharing fresh produce" class="feature-image">
+            </div>
+        </div>
+        <div class="benefits-grid">
+            <h3>Benefits of Fresh Share</h3>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h4>Cost Savings</h4>
+                    <p>Save money through bulk purchasing power and direct-from-farm prices.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Fresh Quality</h4>
+                    <p>Access to fresh, seasonal produce directly from local farmers.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Community Building</h4>
+                    <p>Connect with neighbors and support local agriculture.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Active Groups Section -->
+    <section class="groups">
+        <div class="container">
+            <h2>Active Groups Near You</h2>
+            <div class="groups-grid" id="active-groups">
+                <!-- Groups will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Load header
+        fetch('./pages/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Load footer
+        fetch('./pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                if (window.groups && typeof groups.fetchActiveGroups === 'function') {
+                    await groups.fetchActiveGroups();
+                }
+            } catch (error) {
+                console.error('Error during initialization:', error);
+            }
+        });
+    </script>
+</body>
+</html>

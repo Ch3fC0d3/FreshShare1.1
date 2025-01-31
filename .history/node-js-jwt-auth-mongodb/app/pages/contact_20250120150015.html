@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FreshShare</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Any page-specific styles can go here */
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-header">
+                    <h1>Contact Us</h1>
+                    <p>Have a question or feedback? We'd love to hear from you.</p>
+                </div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                    </button>
+                </form>
+                <div id="successAlert" class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>Your message has been sent successfully!
+                </div>
+                <div id="errorAlert" class="alert alert-error">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span id="errorText">Error sending message. Please try again.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const errorText = document.getElementById('errorText');
+            
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    })
+                });
+
+                if (response.ok) {
+                    successAlert.style.display = 'block';
+                    errorAlert.style.display = 'none';
+                    document.getElementById('contactForm').reset();
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to send message');
+                }
+            } catch (error) {
+                errorText.textContent = error.message;
+                errorAlert.style.display = 'block';
+                successAlert.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
