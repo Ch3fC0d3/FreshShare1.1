@@ -63,12 +63,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'app', 'pages', 'index.html'));
 });
 
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'contact.html'));
+app.get('/groups', (req, res) => {
+    res.sendFile(path.join(__dirname, 'app', 'pages', 'groups.html'));
 });
 
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'app', 'pages', 'about.html'));
+});
+
+app.get('/community', (req, res) => {
+    res.sendFile(path.join(__dirname, 'app', 'pages', 'community.html'));
 });
 
 // Middleware to verify JWT token
