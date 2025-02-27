@@ -70,6 +70,11 @@
     color: var(--primary-color);
 }
 
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
 .nav-link:hover::after {
     width: 100%;
 }
@@ -83,6 +88,34 @@
 #loggedInButtons {
     display: flex;
     gap: 1rem;
+}
+
+.btn-login {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.btn-signup {
+    color: white;
+    background-color: var(--primary-color);
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-signup:hover {
+    background-color: var(--primary-dark);
 }
 
 .btn {

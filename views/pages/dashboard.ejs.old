@@ -1,0 +1,204 @@
+<%- contentFor('style') %>
+<style>
+    :root {
+        --primary: #2E7D32;
+        --primary-light: #4CAF50;
+        --primary-dark: #1B5E20;
+        --secondary: #F5F5F5;
+        --text-dark: #333;
+        --text-light: #666;
+        --border: #E0E0E0;
+        --sidebar-width: 250px;
+    }
+
+    .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh;
+        background-color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 1.5rem;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        z-index: 100;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 2rem;
+        width: calc(100% - var(--sidebar-width));
+        min-height: calc(100vh - 70px);
+        background-color: #f5f7fa;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        color: var(--text-dark);
+        text-decoration: none;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s;
+    }
+
+    .nav-item:hover {
+        background-color: var(--secondary);
+        color: var(--primary);
+    }
+
+    .nav-item.active {
+        background-color: var(--primary);
+        color: white;
+    }
+
+    .nav-item i {
+        margin-right: 0.75rem;
+        font-size: 1.1rem;
+    }
+
+    .nav-section {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin: 1.5rem 0 0.75rem;
+        padding-left: 1rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .stat-label {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+    }
+
+    .stat-footer {
+        font-size: 0.9rem;
+    }
+
+    .trend-up {
+        color: #4CAF50;
+    }
+
+    .trend-down {
+        color: #F44336;
+    }
+
+    .trend-icon {
+        margin-right: 0.25rem;
+    }
+</style>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="logo">
+        <i class="fas fa-seedling" style="color: var(--primary); font-size: 1.6rem;"></i>
+        <div class="logo-text">Fresh Share</div>
+    </div>
+    
+    <a href="/dashboard" class="nav-item active">
+        <i class="fas fa-chart-line"></i>
+        <span>Dashboard</span>
+    </a>
+    <a href="/listings" class="nav-item">
+        <i class="fas fa-apple-alt"></i>
+        <span>My Listings</span>
+    </a>
+    <a href="/marketplace" class="nav-item">
+        <i class="fas fa-search"></i>
+        <span>Browse Food</span>
+    </a>
+    <a href="/community" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Community</span>
+    </a>
+    
+    <div class="nav-section">MANAGEMENT</div>
+    
+    <a href="/schedule" class="nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+    </a>
+    <a href="/locations" class="nav-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Locations</span>
+    </a>
+    <a href="/impact" class="nav-item">
+        <i class="fas fa-leaf"></i>
+        <span>Impact</span>
+    </a>
+    
+    <div class="nav-section">ACCOUNT</div>
+    
+    <a href="/settings" class="nav-item">
+        <i class="fas fa-user-cog"></i>
+        <span>Settings</span>
+    </a>
+    <a href="/help" class="nav-item">
+        <i class="fas fa-question-circle"></i>
+        <span>Help Center</span>
+    </a>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+    <h1 class="page-title">Dashboard</h1>
+    
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Total Items Shared</div>
+            <div class="stat-value">42</div>
+            <div class="stat-footer">
+                <span class="trend-up"><i class="fas fa-arrow-up trend-icon"></i>12%</span>
+                <span style="margin-left: 5px; color: var(--text-light);">from last month</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-label">People Helped</div>
+            <div class="stat-value">68</div>
+            <div class="stat-footer">
+                <span class="trend-up"><i class="fas fa-arrow-up trend-icon"></i>8%</span>
+                <span style="margin-left: 5px; color: var(--text-light);">from last month</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-label">Food Waste Reduced (kg)</div>
+            <div class="stat-value">156</div>
+            <div class="stat-footer">
+                <span class="trend-up"><i class="fas fa-arrow-up trend-icon"></i>15%</span>
+                <span style="margin-left: 5px; color: var(--text-light);">from last month</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-label">Active Listings</div>
+            <div class="stat-value">12</div>
+            <div class="stat-footer">
+                <span class="trend-down"><i class="fas fa-arrow-down trend-icon"></i>3%</span>
+                <span style="margin-left: 5px; color: var(--text-light);">from last month</span>
+            </div>
+        </div>
+    </div>
+</div>

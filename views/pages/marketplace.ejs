@@ -1,0 +1,210 @@
+<%- contentFor('head') %>
+<title>Marketplace - FreshShare</title>
+
+<%- contentFor('style') %>
+<style>
+    .marketplace-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .filters {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .filter-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .filter-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .filter-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .filter-option {
+        margin-bottom: 0.5rem;
+    }
+
+    .items-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .item-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .item-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .item-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .item-content {
+        padding: 1rem;
+    }
+
+    .item-title {
+        font-size: 1.1rem;
+        margin: 0 0 0.5rem 0;
+        color: var(--text-dark);
+    }
+
+    .item-meta {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-light);
+        font-size: 0.9rem;
+    }
+
+    .search-bar {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+        .marketplace-container {
+            padding: 1rem;
+        }
+
+        .items-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+    }
+</style>
+
+<%- contentFor('body') %>
+<div class="marketplace-container">
+    <div class="row">
+        <!-- Filters -->
+        <div class="col-md-3">
+            <div class="filters">
+                <div class="filter-section">
+                    <h3 class="filter-title">Categories</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="vegetables">
+                        <label for="vegetables">Vegetables</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="fruits">
+                        <label for="fruits">Fruits</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="dairy">
+                        <label for="dairy">Dairy</label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Distance</h3>
+                    <select class="form-select">
+                        <option>Within 5 miles</option>
+                        <option>Within 10 miles</option>
+                        <option>Within 20 miles</option>
+                        <option>Any distance</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search items...">
+                <button class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div id="itemsContainer" class="items-grid">
+                <!-- Items will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('script') %>
+<script>
+    async function loadMarketplaceItems(searchTerm, filters) {
+        const itemsContainer = document.getElementById('itemsContainer');
+        
+        // Example items data - replace with actual API call
+        const items = [
+            {
+                title: 'Fresh Tomatoes',
+                image: '/assets/images/tomatoes.jpg',
+                distance: '0.5 miles',
+                date: '2 hours ago'
+            },
+            {
+                title: 'Organic Apples',
+                image: '/assets/images/apples.jpg',
+                distance: '1.2 miles',
+                date: '3 hours ago'
+            }
+        ];
+
+        itemsContainer.innerHTML = items.map(item => `
+            <div class="item-card">
+                <img src="${item.image}" alt="${item.title}" class="item-image">
+                <div class="item-content">
+                    <h3 class="item-title">${item.title}</h3>
+                    <div class="item-meta">
+                        <span>${item.distance}</span>
+                        <span>${item.date}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Load items when page loads
+    loadMarketplaceItems();
+
+    // Add event listeners for search and filters
+    document.querySelector('.search-input').addEventListener('input', (e) => {
+        loadMarketplaceItems(e.target.value);
+    });
+
+    document.querySelectorAll('.filter-option input').forEach(input => {
+        input.addEventListener('change', () => {
+            const filters = Array.from(document.querySelectorAll('.filter-option input:checked'))
+                .map(input => input.id);
+            loadMarketplaceItems(document.querySelector('.search-input').value, filters);
+        });
+    });
+</script>

@@ -60,27 +60,31 @@ exports.signin = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id },
-      config.secret,
+      process.env.JWT_SECRET || "your-jwt-secret",
       {
-        algorithm: 'HS256',
         expiresIn: 86400 // 24 hours
       });
 
-    const authorities = user.roles.map(role => "ROLE_" + role.name.toUpperCase());
+    // Set the token in a cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 86400000 // 24 hours
+    });
 
     res.status(200).send({
       id: user._id,
       username: user.username,
       email: user.email,
-      street: user.street,
-      city: user.city,
-      state: user.state,
-      zipCode: user.zipCode,
-      phoneNumber: user.phoneNumber,
-      roles: authorities,
+      roles: user.roles.map(role => role.name),
       accessToken: token
     });
   } catch (err) {
     res.status(500).send({ message: err.message || "Error during login." });
   }
+};
+
+exports.signout = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).send({ message: "Signed out successfully!" });
 };

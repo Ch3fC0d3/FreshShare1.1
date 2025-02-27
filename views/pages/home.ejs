@@ -1,0 +1,62 @@
+<%- contentFor('body') %>
+
+<div class="row">
+    <!-- Featured Content -->
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Welcome to FreshShare</h2>
+                <p class="lead">Connect with local food enthusiasts, share recipes, and reduce food waste!</p>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Recent Activity</h4>
+            </div>
+            <div class="card-body">
+                <div id="activity-feed">
+                    <!-- Activity items will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-4">
+        <!-- Quick Actions -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Quick Actions</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="/marketplace" class="btn btn-primary">Browse Marketplace</a>
+                    <a href="/groups" class="btn btn-success">Join a Group</a>
+                    <a href="/forum" class="btn btn-info">Start Discussion</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Upcoming Events</h4>
+            </div>
+            <div class="card-body">
+                <div id="events-list">
+                    <!-- Events will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('extraScripts') %>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadActivityFeed();
+        loadEvents();
+    });
+</script>

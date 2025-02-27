@@ -1,0 +1,263 @@
+<%- contentFor('body') %>
+
+<div class="main-content">
+    <div class="container">
+        <div class="signup-container">
+            <h1 class="brand-name">FreshShare</h1>
+            <p class="text-center text-muted mb-4">Join our community of food enthusiasts!</p>
+
+            <form id="signupForm">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <div class="section-title">Personal Information</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Information -->
+                <div class="form-section">
+                    <div class="section-title">Location Information</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" class="form-control" id="state" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="zipCode" class="form-label">ZIP Code</label>
+                        <input type="text" class="form-control" id="zipCode" required>
+                    </div>
+                </div>
+
+                <!-- Preferences -->
+                <div class="form-section">
+                    <div class="section-title">Preferences</div>
+                    <div class="mb-3">
+                        <label class="form-label d-block">Interested in:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="sharing" value="sharing">
+                            <label class="form-check-label" for="sharing">Food Sharing</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="recipes" value="recipes">
+                            <label class="form-check-label" for="recipes">Recipes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="community" value="community">
+                            <label class="form-check-label" for="community">Community Events</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+                    <p class="mt-3">Already have an account? <a href="/login">Login here</a></p>
+                </div>
+            </form>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('extraStyles') %>
+<style>
+    :root {
+        --primary-color: #2ecc71;
+        --primary-dark: #27ae60;
+        --secondary-color: #3498db;
+        --accent-color: #e8f5e9;
+        --background-color: #ecf0f1;
+        --text-color: #2C3639;
+        --section-bg: rgba(255, 255, 255, 0.9);
+        --header-height: 80px;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #2ecc71 0%, #3498db 100%);
+        color: var(--text-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        padding-top: calc(var(--header-height) + 20px);
+    }
+    
+    .main-content {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 2rem 0;
+        background: radial-gradient(circle at top right, rgba(46, 204, 113, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
+    }
+
+    .signup-container {
+        width: 100%;
+        background: var(--section-bg);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin: 0 auto;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-section {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border: 1px solid rgba(46, 204, 113, 0.1);
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .section-title::before {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        border-radius: 2px;
+    }
+
+    .form-control {
+        border: 2px solid #eef2f7;
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        background-color: #f8fafc;
+        height: 42px;
+        width: 100%;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+        background-color: white;
+    }
+
+    .btn-primary {
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(46, 204, 113, 0.2);
+    }
+
+    .error-message {
+        color: #dc3545;
+        margin-top: 1rem;
+        text-align: center;
+        display: none;
+    }
+
+    .brand-name {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+</style>
+
+<%- contentFor('extraScripts') %>
+<script>
+    // Check if already logged in
+const user = JSON.parse(localStorage.getItem('user') || 'null');
+if (user && user.accessToken) {
+    window.location.href = '/dashboard';
+}
+
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const errorMessage = document.getElementById("errorMessage");
+        errorMessage.style.display = "none";
+
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            errorMessage.textContent = "Passwords do not match";
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        const formData = {
+            username: document.getElementById("username").value,
+            email: document.getElementById("email").value,
+            password: password,
+            city: document.getElementById("city").value,
+            state: document.getElementById("state").value,
+            zipCode: document.getElementById("zipCode").value,
+            preferences: {
+                sharing: document.getElementById("sharing").checked,
+                recipes: document.getElementById("recipes").checked,
+                community: document.getElementById("community").checked
+            }
+        };
+
+        try {
+            const response = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                window.location.href = '/login?registered=true';
+            } else {
+                errorMessage.textContent = data.message || 'Registration failed';
+                errorMessage.style.display = "block";
+            }
+        } catch (err) {
+            errorMessage.textContent = 'An error occurred. Please try again.';
+            errorMessage.style.display = "block";
+        }
+    });
+</script>

@@ -1,0 +1,456 @@
+<%- contentFor('body') %>
+
+<div class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Share Fresh Food with Your Community</h1>
+            <p>Join FreshShare to reduce food waste and build stronger communities through food sharing.</p>
+            <div class="cta-buttons">
+                <a href="/signup" class="btn btn-primary">Get Started</a>
+                <a href="/about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose FreshShare?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Reduce Food Waste</h3>
+                    <p>Share surplus food with your neighbors and help reduce food waste in your community.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Build Community</h3>
+                    <p>Connect with like-minded people in your area and build lasting relationships.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Make a Difference</h3>
+                    <p>Contribute to a more sustainable future while helping those in need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Understanding Section -->
+    <section class="understanding-section">
+        <div class="container">
+            <h2 class="section-title">Understanding Fresh Share</h2>
+            <div class="info-grid">
+                <div class="info-text">
+                    <p class="intro">A <strong>Fresh Share group</strong> is a collective of neighbors who pool their resources to purchase fresh, local food directly from farmers and suppliers. This collaborative approach enables members to access high-quality products at reduced prices while supporting local communities.</p>
+                    <h3>How Fresh Share Works</h3>
+                    <ul class="feature-list">
+                        <li><strong>Group Ordering:</strong> Members express interest in local, fresh products, and once enough people join, the group places a bulk order directly from local farmers.</li>
+                        <li><strong>Cost Sharing:</strong> The total cost is divided among participants based on their orders, resulting in significant savings compared to retail prices.</li>
+                        <li><strong>Distribution:</strong> Fresh items are divided among members at convenient pickup locations or through local delivery options.</li>
+                    </ul>
+                </div>
+                <div class="info-media">
+                    <video controls class="feature-video">
+                        <source src="/images/video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="benefits-grid">
+                <h3 class="benefits-title">Benefits of Fresh Share</h3>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Cost Savings</h4>
+                        <p>Save money through bulk purchasing power and direct-from-farm prices.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Fresh Quality</h4>
+                        <p>Access to fresh, seasonal produce directly from local farmers.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Community Building</h4>
+                        <p>Connect with neighbors and support local agriculture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<%- contentFor('style') %>
+<style>
+    /* Hero Section */
+    .hero-section {
+        background-image: url('/images/vegetables.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 0;
+        text-align: center;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+        margin-top: 80px;
+        width: 100%;
+        height: calc(100vh - 80px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(76, 51, 218, 0.2); /* Light overall overlay */
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem;
+        background-color: rgba(170, 139, 172, 0.6); /* Translucent black background */
+        border-radius: 15px;
+        backdrop-filter: blur(5px); /* Slight blur effect */
+        transform: translateY(-40px);
+    }
+
+    .hero-section h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        font-family: 'Syne', sans-serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        line-height: 1.2;
+    }
+
+    .hero-section p {
+        font-size: 1.4rem;
+        margin-bottom: 2.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        line-height: 1.6;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #333;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #fff;
+        transform: translateY(-2px);
+    }
+
+    /* Features Section */
+    .features-section {
+        padding: 60px 0 100px;
+        background-color: #b0e6a9;
+        text-align: center;
+    }
+    
+    .section-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .section-title:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 3px;
+        background-color: var(--primary-color);
+        margin: 15px auto 0;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .feature-card {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: #e8f5e9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-card i {
+        font-size: 32px;
+        color: var(--primary-color);
+    }
+
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+        font-family: 'Syne', sans-serif;
+    }
+    
+    .feature-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    /* Understanding Section */
+    .understanding-section {
+        padding: 100px 0;
+        background-color: hsl(129, 76%, 76%);
+    }
+    
+    .understanding-section .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        margin-bottom: 4rem;
+    }
+    
+    .info-text {
+        padding-right: 1rem;
+    }
+    
+    .info-text .intro {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        color: #555;
+    }
+    
+    .info-text h3 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+    
+    .info-media {
+        text-align: center;
+    }
+    
+    .feature-video {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        height: auto;
+    }
+    
+    .feature-list {
+        padding-left: 1.5rem;
+        margin-bottom: 0;
+    }
+    
+    .feature-list li {
+        margin-bottom: 1rem;
+        position: relative;
+        padding-left: 0.5rem;
+    }
+    
+    .feature-list li strong {
+        color: var(--primary-color);
+    }
+    
+    .benefits-title {
+        text-align: center;
+        font-family: 'Syne', sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 2.5rem;
+        color: #333;
+    }
+    
+    .benefits-grid {
+        margin-top: 2rem;
+    }
+    
+    .benefits-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    
+    .benefit-item {
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+    
+    .benefit-item .icon-wrapper {
+        margin-bottom: 1.5rem;
+    }
+    
+    .benefit-item h4 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+    
+    .benefit-item p {
+        color: #666;
+        line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section {
+            height: calc(100vh - 80px);
+            padding: 1rem;
+        }
+
+        .hero-content {
+            margin: 1rem;
+            padding: 2rem;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cta-buttons .btn {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            min-height: 80vh;
+            padding: 160px 0 100px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+        
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .info-text {
+            padding-right: 0;
+            order: 1;
+        }
+        
+        .info-media {
+            order: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .benefits-list {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<%- contentFor('script') %>
+<script>
+    // Add any additional scripts here
+</script>
+
+<%- contentFor('bodyClass') %>homepage

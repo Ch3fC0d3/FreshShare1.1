@@ -1,0 +1,157 @@
+<%- contentFor('head') %>
+<title>Forum - FreshShare</title>
+
+<%- contentFor('style') %>
+<style>
+    .forum-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    
+    .forum-filters {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    .forum-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+    
+    .post-meta {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .post-content {
+        margin: 1rem 0;
+    }
+    
+    .post-actions {
+        display: flex;
+        gap: 1rem;
+        color: #6c757d;
+    }
+    
+    .post-actions span {
+        cursor: pointer;
+    }
+    
+    .post-actions span:hover {
+        color: #0d6efd;
+    }
+</style>
+
+<%- contentFor('body') %>
+<div class="forum-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Community Forum</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+            <i class="fas fa-plus me-2"></i>New Post
+        </button>
+    </div>
+
+    <!-- Forum Filters -->
+    <div class="forum-filters">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option>All Categories</option>
+                    <option>Questions</option>
+                    <option>Discussion</option>
+                    <option>Tips & Tricks</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option>Most Recent</option>
+                    <option>Most Popular</option>
+                    <option>Most Commented</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Search posts...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Forum Posts -->
+    <div class="forum-posts">
+        <!-- Sample Post -->
+        <div class="forum-card">
+            <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/CommunityMembers.jpg" alt="User Avatar" class="user-avatar">
+                <div>
+                    <h5 class="mb-0">John Doe</h5>
+                    <span class="post-meta">2 hours ago · Tips & Tricks</span>
+                </div>
+            </div>
+            <div class="post-content">
+                <h4>Best practices for storing vegetables</h4>
+                <p>Here are some tips I've learned about keeping vegetables fresh longer...</p>
+            </div>
+            <div class="post-actions">
+                <span><i class="far fa-heart"></i> 24 Likes</span>
+                <span><i class="far fa-comment"></i> 8 Comments</span>
+                <span><i class="far fa-bookmark"></i> Save</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Post Modal -->
+<div class="modal fade" id="createPostModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select">
+                            <option>Questions</option>
+                            <option>Discussion</option>
+                            <option>Tips & Tricks</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Post</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('script') %>
+<script>
+    // Add any forum-specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize any forum components
+    });
+</script>

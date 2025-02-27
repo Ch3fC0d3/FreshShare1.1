@@ -7,10 +7,24 @@ const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
 const sgMail = require('@sendgrid/mail');
 const jwt = require("jsonwebtoken");
+const cookieParser = require('cookie-parser');
 const db = require("./app/models");
 const User = db.user;
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
+
+// Set up EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('layout', 'layouts/layout');
+app.use(expressLayouts);
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Use cookie parser
+app.use(cookieParser());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -43,77 +57,188 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files from app/pages directory
-app.use(express.static(path.join(__dirname, 'app', 'pages'), {
-    setHeaders: function (res, filepath) {
-        if (filepath.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'no-cache');
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+    // For web routes, if no token redirect to login
+    if (req.path.startsWith('/api/')) {
+        // API routes use token from headers
+        const token = req.headers['x-access-token'] || req.headers['authorization'];
+        
+        if (!token) {
+            return res.status(403).send({ message: "No token provided!" });
         }
-        // Set correct MIME types for CSS and JS files
-        if (filepath.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        } else if (filepath.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
+
+        const tokenString = token.replace('Bearer ', '');
+
+        jwt.verify(tokenString, process.env.JWT_SECRET || "your-secret-key", (err, decoded) => {
+            if (err) {
+                return res.status(401).send({ message: "Unauthorized!" });
+            }
+            req.userId = decoded.id;
+            next();
+        });
+    } else {
+        // Web routes use session/cookie
+        const token = req.cookies?.token || req.headers['x-access-token'] || req.headers['authorization'];
+        
+        if (!token) {
+            return res.redirect('/login');
         }
+
+        const tokenString = token.replace('Bearer ', '');
+
+        jwt.verify(tokenString, process.env.JWT_SECRET || "your-secret-key", (err, decoded) => {
+            if (err) {
+                return res.redirect('/login');
+            }
+            req.userId = decoded.id;
+            next();
+        });
     }
-}));
+};
+
+// Middleware to make user data available to all views
+app.use(async (req, res, next) => {
+    const token = req.cookies?.token || req.headers['x-access-token'] || req.headers['authorization'];
+    
+    if (token) {
+        const tokenString = token.replace('Bearer ', '');
+        try {
+            const decoded = jwt.verify(tokenString, process.env.JWT_SECRET || "your-secret-key");
+            const user = await User.findById(decoded.id);
+            res.locals.user = user;
+        } catch (err) {
+            res.locals.user = null;
+        }
+    } else {
+        res.locals.user = null;
+    }
+    next();
+});
+
+// Routes
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
+require('./app/routes/message.routes')(app);
+
+// Dashboard route
+app.get('/dashboard', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).populate("roles", "-__v");
+    if (!user) {
+      return res.redirect('/login');
+    }
+    
+    res.render('pages/dashboard', {
+      title: 'Dashboard - Fresh Share',
+      user: {
+        username: user.username,
+        email: user.email,
+        roles: user.roles.map(role => role.name)
+      },
+      layout: 'layouts/layout'
+    });
+  } catch (err) {
+    console.error('Error rendering dashboard:', err);
+    res.redirect('/login');
+  }
+});
 
 // HTML Routes - must be before the catch-all route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'index.html'));
+    res.render('pages/index', { 
+        title: 'FreshShare - Share Fresh Food with Your Community',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
 });
 
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'contact.html'));
-});
-
-app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'about.html'));
-});
-
-// Middleware to verify JWT token
-const verifyToken = (req, res, next) => {
-  const token = req.headers['x-access-token'] || req.headers['authorization'];
-  
-  if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
-  }
-
-  const tokenString = token.replace('Bearer ', '');
-
-  jwt.verify(tokenString, process.env.JWT_SECRET || "your-secret-key", (err, decoded) => {
-    if (err) {
-      return res.status(401).send({ message: "Unauthorized!" });
-    }
-    req.userId = decoded.id;
-    next();
-  });
-};
-
-// Profile endpoint
-app.get('/api/user/profile', verifyToken, async (req, res) => {
-  try {
-    const user = await User.findById(req.userId).select('-password');
-    if (!user) {
-      return res.status(404).send({ message: "User not found." });
-    }
-    res.status(200).send(user);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
-});
-
-// Routes for authentication pages
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'login.html'));
+    if (req.user) {
+        return res.redirect('/dashboard');
+    }
+    res.render('pages/login', { 
+        title: 'Login - FreshShare',
+        user: null,
+        layout: 'layouts/layout'
+    });
 });
 
 app.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'signup.html'));
+    if (req.user) {
+        return res.redirect('/dashboard');
+    }
+    res.render('pages/signup', { 
+        title: 'Sign Up - FreshShare',
+        user: null,
+        layout: 'layouts/layout'
+    });
 });
 
-app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'dashboard.html'));
+app.get('/contact', (req, res) => {
+    res.render('pages/contact', {
+        title: 'Contact Us - FreshShare',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
+});
+
+app.get('/about', (req, res) => {
+    res.render('pages/about', {
+        title: 'About Us - FreshShare',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
+});
+
+app.get('/marketplace', (req, res) => {
+    res.render('pages/marketplace', { 
+        title: 'Marketplace - FreshShare',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
+});
+
+app.get('/community', (req, res) => {
+    res.render('pages/community', { 
+        title: 'Community - FreshShare',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
+});
+
+app.get('/forum', (req, res) => {
+    res.render('pages/forum', {
+        title: 'Community Forum - FreshShare',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
+});
+
+app.get('/groups', (req, res) => {
+    res.render('pages/groups', {
+        title: 'Groups - FreshShare',
+        user: req.user,
+        layout: 'layouts/layout'
+    });
+});
+
+// Profile endpoint
+app.get('/profile', verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select('-password');
+        if (!user) {
+            return res.redirect('/login');
+        }
+        res.render('pages/profile', {
+            title: 'Profile - FreshShare',
+            user: user,
+            layout: 'layouts/layout'
+        });
+    } catch (err) {
+        console.error('Error loading profile:', err);
+        res.redirect('/login');
+    }
 });
 
 // API Routes
@@ -169,21 +294,21 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // Load routes
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
 require('./app/routes/message.routes')(app);
-
-// Serve the marketplace page
-app.get('/marketplace', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'pages', 'shopping.html'));
-});
 
 // Handle all other routes - serve index.html for client-side routing
 app.get('*', (req, res) => {
-    if (req.path.includes('.')) {
+    if (req.path.startsWith('/pages/')) {
+        // Redirect /pages/something to /something
+        res.redirect(req.path.replace('/pages/', '/'));
+    } else if (req.path.includes('.')) {
         res.status(404).send('Not found');
     } else {
-        res.sendFile(path.join(__dirname, 'app', 'pages', 'index.html'));
+        res.render('pages/index', { 
+            title: 'FreshShare - Share Fresh Food with Your Community',
+            user: req.user,
+            layout: 'layouts/layout'
+        });
     }
 });
 

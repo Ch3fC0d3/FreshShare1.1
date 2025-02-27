@@ -1,0 +1,40 @@
+<header class="header">
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <i class="fas fa-seedling"></i>
+            <span>FreshShare</span>
+        </a>
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/marketplace" class="nav-link">Marketplace</a>
+            <a href="/forum" class="nav-link">Forum</a>
+            <a href="/groups" class="nav-link">Groups</a>
+            <a href="/profile" class="nav-link">Profile</a>
+        </div>
+        <div class="auth-buttons">
+            <% if (!locals.user) { %>
+                <div id="loggedOutButtons" class="cta-buttons">
+                    <a href="/login" class="btn btn-secondary">Login</a>
+                    <a href="/signup" class="btn btn-primary">Sign Up</a>
+                </div>
+            <% } else { %>
+                <div id="loggedInButtons" class="user-menu">
+                    <a href="/profile" class="btn btn-secondary">
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                    <button onclick="logout()" class="btn btn-primary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            <% } %>
+        </div>
+    </nav>
+</header>
+
+<script>
+    function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/';
+    }
+</script>
